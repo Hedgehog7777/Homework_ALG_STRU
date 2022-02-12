@@ -1,13 +1,5 @@
 #include <stdio.h>
-
-void zapar(int *arr, int x)
-{
- for (int i=0; i<x; i++)
- {
-  arr[i] = x-i;
- }
-}
-
+// Функция для вывода массива***************************************************************
 void printar(int *arr, int x)
 {
  for (int i=0; i<x; i++)
@@ -16,7 +8,7 @@ void printar(int *arr, int x)
  }
  printf("\n");
 }
-
+// Функция сортировки вставками***************************************************************
 void VS(int *arr, int x)
 {
  int t, p;
@@ -33,7 +25,7 @@ void VS(int *arr, int x)
  }
 }
 
-
+// Функция быстрой сортьровки***************************************************************
 
 void QS(int *arr, int y, int x)
 { 
@@ -76,6 +68,8 @@ void QS(int *arr, int y, int x)
   if (a<x) QS(arr, a, x);
   if (b>y) QS(arr, y, b);
  }
+ 
+// Домашнее задание №1***************************************************************
 
 void AQS(int *arr, int y, int x)
 {
@@ -83,14 +77,49 @@ void AQS(int *arr, int y, int x)
  if (((x+1)-y) < 10)
  {
   VS(arr, ((x+1)-y));
+  return;
  }
  else QS(arr, y, x);
+}
+// Домашнее задание №2***************************************************************
+void bloksort(int *arr, int x)
+{
+ int max = x;
+ int kor[11][x+1];
+ 
+ for (int i=0;i<11;i++)
+ {
+  kor[i][max] = 0;
+ }
+ 
+ for (int k=1; k<10000; k*=10)
+ {
+ int b=0;
+  for (int i=0; i<x;i++)
+  {
+   if ((arr[i]%2)==0)
+   {
+    int y = (arr[i]/k)%10;
+    kor[y][kor[y][max]++]=arr[i];
+    kor[10][b++]=i;
+   }
+  }
+  int c=0;
+  for (int i=0; i<10; i++)
+  {
+   for (int j=0; j<kor[i][max]; j++)
+   {
+    arr[kor[10][c]] = kor[i][j];
+    c = c+1;
+   }
+   kor[i][max]=0;
+  }
+ }
 }
 
 int main()
 {
- 
- const int a = 18;
+ const int a = 25;
  int arr[a];
  arr[0] = 12;
  arr[1] = 22;
@@ -110,13 +139,21 @@ int main()
  arr[15] = 63;
  arr[16] = 124;
  arr[17] = 21;
- 
+ arr[18] = 1;
+ arr[19] = 340;
+ arr[20] = 5;
+ arr[21] = 78;
+ arr[22] = 1;
+ arr[23] = 9;
+ arr[24] = 12;
+  
  printar(arr, a);
- //VS(arr, a);
- AQS(arr, 0, a-1);
- printar(arr, a);
- 
 
+ //bloksort(arr, a);
+
+ AQS(arr, 0, a-1);
  
+ printar(arr, a);
+  
  return 0;
 }
