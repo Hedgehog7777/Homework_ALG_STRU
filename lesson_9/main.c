@@ -5,6 +5,20 @@
 #define SIZEX 5
 #define SIZEY 2
 
+void printar(int arr[][SIZEX])
+{
+ for(int i=0; i<SIZEY; i++)
+ {
+  for(int j=0; j<SIZEX; j++)
+  {
+   printf("% 5d", arr[i][j]);
+  }
+  printf("\n");
+ }
+ printf("\n");
+}
+
+
 T que[SIZEY][SIZEX];
 unsigned int items = 0;
  
@@ -36,6 +50,7 @@ void ins(int data, unsigned int prior)
 
 int rem()
 {
+ items--;
  unsigned int a =0;
  unsigned int indx =0;
  for (int i=items; i >= 0; i--)
@@ -47,29 +62,18 @@ int rem()
   }
  }
  a = que[0][indx];
- items--;
- for(int i=indx; i <= (items); i++)
+ 
+ for(int i=indx; i <= items; i++)
  {
-  que[0][indx] = que[0][indx+1];
-  que[1][indx] = que[1][indx+1];
+  que[0][i] = que[0][i+1];
+  que[1][i] = que[1][i+1];
  }
  que[0][items] = 0;
  que[1][items] = 0;
+ 
  return a;
 }
 
-void printar(int arr[][SIZEX])
-{
- for(int i=0; i<SIZEY; i++)
- {
-  for(int j=0; j<SIZEX; j++)
-  {
-   printf("% 5d", arr[i][j]);
-  }
-  printf("\n");
- }
- printf("\n");
-}
 
 //Задание №2**************************************************
 
@@ -180,20 +184,31 @@ printar(que);
 ins(245, 2);
 printar(que);
 
-//ins(288, 100);
-//printar(que);
+printf("rem = %d\n\n", rem());
+printar(que);
 
-printf("rem = %d\n", rem());
+printf("rem = %d\n\n", rem());
+printar(que);
+
+printf("rem = %d\n\n", rem());
+printar(que);
+
+ins(298, 100);
+printar(que);
+
+printf("rem = %d\n\n", rem());
 printar(que);
 
 ins(288, 33);
 printar(que);
 
-printf("rem = %d\n", rem());
+printf("rem = %d\n\n", rem());
 printar(que);
+
 //Задание №2**************************************************
+
 unsigned int h = 29393;
-//printf("A number in decimal %d will be equal to %lld in binary\n", h, perevod(h));
+printf("A number in decimal %d will be equal to %lld in binary\n", h, perevod(h));
 
  return 0;
 }
